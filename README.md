@@ -1,2 +1,2 @@
 # PicCrawler
-This is a picture crawler of www.pic.netbian.com
+This is a picture crawler of pic.netbian.com
