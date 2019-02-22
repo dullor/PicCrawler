@@ -18,7 +18,13 @@ public class Web {
 	private URL url;
 	private StringBuffer webCode=new StringBuffer();
 	private List<String> picUrl=new ArrayList<>();
+	private String downloadAddress;
 
+	public Web(String url, String donwloadAddress) {
+		this(url);
+		this.downloadAddress=donwloadAddress;
+	}
+	
 	public Web(String url) {
 		try {
 			this.url=new URL(url);
@@ -29,6 +35,7 @@ public class Web {
 		}
 	}
 
+	
 	public String getWebCode() {
 		return webCode.toString();
 	}
@@ -61,7 +68,6 @@ public class Web {
 			picUrl.add(m.group());
 		}
 		String nextPage=findNextPage();
-		System.out.println(nextPage);
 		if(nextPage!=null) {
 			String tempUrl=url.toString();
 			int indexOfINDEX=tempUrl.lastIndexOf("index");
@@ -100,10 +106,10 @@ public class Web {
 		try {
 			for(String pic:picUrl) {
 				String picBed=getPicBedUrl(pic);
-				System.out.println(picBed);
+				System.out.println("picBed:"+picBed);
 				URLConnection conn = ProxyConnect("http://pic.netbian.com/"+picBed);
 				InputStream in = conn.getInputStream();
-				FileOutputStream fo = new FileOutputStream(new File("E:/fengjing"
+				FileOutputStream fo = new FileOutputStream(new File(downloadAddress
 						+ "/"+picBed.substring(30)+".jpg"));
 				byte[] buf = new byte[1024];
 				int length = 0;
